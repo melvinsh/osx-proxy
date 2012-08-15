@@ -19,7 +19,11 @@ if [ $1 == "off" ]; then
   echo "Done!"
 fi
 
-if [ $1 == "kill" ]; then
-  pids = `ps -A | grep "ssh -f" | awk '{print $1}'`
-  echo pids
+if [ $1 == "killall" ]; then
+  pids=`ps -A | grep "ssh -f" | grep "sleep" | awk '{print $1}'`
+  echo "Killing all running proxy connections."
+  for pid in $pids
+    do
+  `kill -9 $pid`
+  done
 fi
