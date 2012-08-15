@@ -18,3 +18,8 @@ if [ $1 == "off" ]; then
   sudo networksetup -setsocksfirewallproxystate Wi-Fi off
   echo "Done!"
 fi
+
+if [ $1 == "kill" ]; then
+  pids = `ps -A | grep "ssh -f" | awk '{print $1}'`
+  echo pids
+fi

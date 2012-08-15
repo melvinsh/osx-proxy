@@ -15,5 +15,5 @@ remoteproxy="IP_OR_HOSTNAME_HERE"
 Run like this:
 
 ```
-proxy on|off
+proxy on|off|killall
 ```
