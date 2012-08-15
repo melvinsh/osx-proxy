@@ -1,4 +1,4 @@
-cheddarb
+osx-proxy
 ========
 
 Move `proxy` to somewhere in your PATH and make sure to `chmod +x`.
