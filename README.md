@@ -10,6 +10,7 @@ Edit settings in `proxy`:
 ```
 remoteuser="SSH_USER_HERE"
 remoteproxy="IP_OR_HOSTNAME_HERE"
+remoteport="22"
 ```
 
 Run like this:
