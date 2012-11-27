@@ -1,7 +1,7 @@
 # !/bin/sh
 # SSH SOCKS proxy script for Mac OS X
 
-localport=$RANDOM
+localport=`jot -r 1 2000 65000`
 remoteuser="SSH_USER_HERE"
 remoteproxy="IP_OR_HOSTNAME_HERE"
 remoteport="22"
