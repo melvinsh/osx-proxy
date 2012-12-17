@@ -12,6 +12,16 @@ If you choose to place the variables as Env varibles, make sure that file is sou
 
 Edit settings in `proxy`:
 
+Set PROXY_USER and PROXY_HOST somewhere in sourced path
+ie enter following info into .bashrc or .zshrc or a more private auth file
+
+```
+export PROXY_USER='vader'
+export PROXY_HOST='thedeathstar'
+```
+
+If choosing not to set credentials as Environmental Variables, replace the values below for $PROXY_USER and $PROXY_HOST with genuine credentials.
+
 ```
 remoteuser="SSH_USER_HERE"
 remoteproxy="IP_OR_HOSTNAME_HERE"
