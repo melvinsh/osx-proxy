@@ -5,16 +5,16 @@
 # ie enter following info into .bashrc or .zshrc or a more private auth file
 # =start_example
 #
-# export PROXY_USER='vader'
-# export PROXY_HOST='thedeathstar'
+# export PROXY_USER='user'
+# export PROXY_HOST='example.com'
 #
 # =end_example
 #
 # If choosing not to set credentials as Environmental Variables, replace the values below for $PROXY_USER and $PROXY_HOST with genuine credentials.
 # ie 
-# remoteuser='vader'
-# remoteproxy='thedeathstar'
-#
+# remoteuser='user'
+# remoteproxy='example.com'
+
 remoteuser=$PROXY_USER
 remoteproxy=$PROXY_HOST
 remoteport="22"
@@ -36,8 +36,8 @@ get_proxy_state(){
   result=`networksetup -getsocksfirewallproxy Wi-Fi | head -1 | cut -d ' ' -f2`
   echo $result
 }
-proxy_on(){
 
+proxy_on(){
   echo "Listening on localhost:$localport. Modifying network settings.."
   sudo networksetup -setsocksfirewallproxy Wi-Fi 127.0.0.1 $localport off
   echo "Starting SSH session. Will run in background for 1 day."
@@ -45,14 +45,12 @@ proxy_on(){
 }
 
 proxy_off(){
-
   echo "Disabling proxy in network settings."
   sudo networksetup -setsocksfirewallproxystate Wi-Fi off
   echo "Done!"
 }
 
 kill_all(){
-
   pids=`ps -A | grep "ssh -f" | grep "sleep" | awk '{print $1}'`
   echo "Killing all running proxy connections."
   for pid in $pids
