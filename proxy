@@ -18,7 +18,7 @@
 remoteuser=$PROXY_USER
 remoteproxy=$PROXY_HOST
 remoteport="22"
-
+#
 # Get the min and max system-available ports.
 lowerport=`sysctl net.inet.ip.portrange.first | cut -d " " -f 2`
 upperport=`sysctl net.inet.ip.portrange.last | cut -d " " -f 2`
@@ -27,7 +27,7 @@ localport=`jot -r 1 $lowerport $upperport`
 
 usage(){
 echo ""
-echo "Usage: proxy [on|off|killall|shutdown|no_args]"
+echo "Usage: proxy [on|off|killall|shutdown|no_args] [Wi-Fi|Ethernet]"
 echo "Proxy is a proxy settings toggle script for OSX"
 echo "Proxy initiates an SSH tunnel and then enables a Socks proxy"
 }
@@ -37,20 +37,28 @@ echo "Unknown input, try again with different term"
 }
 
 get_proxy_state(){
-  result=`networksetup -getsocksfirewallproxy Wi-Fi | head -1 | cut -d ' ' -f2`
+  result=`networksetup -getsocksfirewallproxy $interface | head -1 | cut -d ' ' -f2`
   echo $result
+}
+
+set_interface(){
+  if [[ $2 =~ "^[Ee]th" ]]; then
+    interface="Ethernet"
+  else
+    interface="Wi-Fi"
+  fi
 }
 
 proxy_on(){
   echo "Listening on localhost:$localport. Modifying network settings.."
-  sudo networksetup -setsocksfirewallproxy Wi-Fi 127.0.0.1 $localport off
+  sudo networksetup -setsocksfirewallproxy $interface 127.0.0.1 $localport off
   echo "Starting SSH session. Will run in background for 1 day."
   ssh -f -p $remoteport -D $localport $remoteuser@$remoteproxy sleep 1d
 }
 
 proxy_off(){
   echo "Disabling proxy in network settings."
-  sudo networksetup -setsocksfirewallproxystate Wi-Fi off
+  sudo networksetup -setsocksfirewallproxystate $interface off
   echo "Done!"
 }
 
@@ -80,6 +88,8 @@ toggle_state(){
     echo "ON"
   fi
 }
+
+set_interface
 
 case $1 in
 "on")
