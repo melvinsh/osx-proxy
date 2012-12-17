@@ -19,7 +19,11 @@ remoteuser=$PROXY_USER
 remoteproxy=$PROXY_HOST
 remoteport="22"
 
-localport=`jot -r 1 2000 65000`
+# Get the min and max system-available ports.
+lowerport=`sysctl net.inet.ip.portrange.first | cut -d " " -f 2`
+upperport=`sysctl net.inet.ip.portrange.last | cut -d " " -f 2`
+
+localport=`jot -r 1 $lowerport $upperport`
 
 usage(){
 echo ""
