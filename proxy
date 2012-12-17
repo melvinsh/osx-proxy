@@ -32,7 +32,7 @@ echo "Unknown input, try again with different term"
 }
 
 get_proxy_state(){
-  result=`networksetup -getsocksfirewallproxy Wi-Fi | head -1 | cut -d: -f2 | cut -d ' ' -f2`
+  result=`networksetup -getsocksfirewallproxy Wi-Fi | head -1 | cut -d ' ' -f2`
   echo $result
 }
 proxy_on(){
