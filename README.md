@@ -31,7 +31,7 @@ remoteport="22"
 Run like this:
 
 ```
-proxy on|off|killall|shutdown|[no_argument]
+proxy [on|off|killall|shutdown|no_argument]
 
 on = turn proxy on and setup ssh tunnel
 off = turn proxy off
