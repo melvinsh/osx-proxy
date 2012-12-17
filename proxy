@@ -31,6 +31,10 @@ unknown_input(){
 echo "Unknown input, try again with different term"
 }
 
+get_proxy_state(){
+  result=`networksetup -getsocksfirewallproxy Wi-Fi | head -1 | cut -d: -f2 | cut -d ' ' -f2`
+  echo $result
+}
 proxy_on(){
 
   echo "Listening on localhost:$localport. Modifying network settings.."
@@ -55,6 +59,25 @@ kill_all(){
   `kill -9 $pid`
   done
 }
+
+shutdown(){
+  proxy_off
+  kill_all
+  echo "Proxy shutdown complete!"
+}
+
+toggle_state(){
+  # result=`get_proxy_state`
+  echo $(get_proxy_state) | grep -i 'y' >> /dev/null
+  if [[ $? =~ 0 ]]; then
+    shutdown
+    echo "OFF"
+  else
+    proxy_on
+    echo "ON"
+  fi
+}
+
 case $1 in
 "on")
   proxy_on
@@ -65,10 +88,11 @@ case $1 in
 "killall")
   kill_all
   ;;
+"shutdown")
+  shutdown
+  ;;
 "")
-  # add toggle ability
-  unknown_input
-  usage
+  toggle_state
   ;;
 *)
   unknown_input
