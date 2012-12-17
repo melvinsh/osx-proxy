@@ -3,7 +3,12 @@ osx-proxy
 
 **This should work with any remote SSH server!**
 
-Move `proxy` to somewhere in your PATH and make sure to `chmod +x`.
+Move `proxy` to somewhere in your PATH.
+Make proxy executable via `chmod +x proxy`.
+
+Choose between enabling proxy authorization as Environmental Variables or through directly placing credentials in proxy file.
+
+If you choose to place the variables as Env varibles, make sure that file is sourced by your `.bashrc` or `.zshrc`.
 
 Edit settings in `proxy`:
 

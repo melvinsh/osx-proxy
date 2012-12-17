@@ -3,10 +3,19 @@
 
 localport=`jot -r 1 2000 65000`
 # Set PROXY_USER and PROXY_HOST somewhere in sourced path
-# ie enter following info into .bashrc or .zshrc or more private auth file
+# ie enter following info into .bashrc or .zshrc or a more private auth file
 # =start_example
+#
 # export PROXY_USER='vader'
 # export PROXY_HOST='thedeathstar'
+#
+# =end_example
+#
+# If choosing not to set credentials as Environmental Variables, replace the values below for $PROXY_USER and $PROXY_HOST with genuine credentials.
+# ie 
+# remoteuser='vader'
+# remoteproxy='thedeathstar'
+#
 remoteuser=$PROXY_USER
 remoteproxy=$PROXY_HOST
 remoteport="22"
