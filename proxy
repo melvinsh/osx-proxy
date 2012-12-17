@@ -1,7 +1,6 @@
 # !/bin/sh
 # SSH SOCKS proxy script for Mac OS X
 
-localport=`jot -r 1 2000 65000`
 # Set PROXY_USER and PROXY_HOST somewhere in sourced path
 # ie enter following info into .bashrc or .zshrc or a more private auth file
 # =start_example
@@ -20,9 +19,11 @@ remoteuser=$PROXY_USER
 remoteproxy=$PROXY_HOST
 remoteport="22"
 
+localport=`jot -r 1 2000 65000`
+
 usage(){
 echo ""
-echo "Usage: proxy [on|off|killall]"
+echo "Usage: proxy [on|off|killall|shutdown|no_args]"
 echo "Proxy is a proxy settings toggle script for OSX"
 echo "Proxy initiates an SSH tunnel and then enables a Socks proxy"
 }
@@ -90,6 +91,9 @@ case $1 in
   ;;
 "shutdown")
   shutdown
+  ;;
+"usage")
+  usage
   ;;
 "")
   toggle_state
